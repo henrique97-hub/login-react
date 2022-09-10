@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./login.css";
 import { MdEmail, MdLock } from "react-icons/md";
 import { HiEye, HiEyeOff } from "react-icons/hi";
+import Cadastro from "../Authenticate";
+
 
 
 const Login = () => {
@@ -9,6 +11,8 @@ const Login = () => {
   // [] para manipular o estado das propriedades
   const [inputs, setInputs] = useState({});
   const [show, setShow] = useState(false);
+
+
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -28,17 +32,26 @@ const Login = () => {
     setShow(!show);
   };
 
+  const criarConta = (e) => {
+    e.preventDefault();
+
+    // <Cadastro/>
+    console.log('clicou no botão')
+
+  }
+  
+
 
   return (
     // onSubmit -> envia p formulario
     <form onSubmit={handleSubmit}>
       <div className="login">
-        <div className="login-logo">
+        {/* <div className="login-logo">
           <img
             src="https://www.freeiconspng.com/thumbs/login-icon/client-login-icon-4.gif"
             alt="Icone de login"
           />
-        </div>
+        </div> */}
         <div className="login-right">
           <h1>Acessar App</h1>
           <div className="login-loginInputEmail">
@@ -70,7 +83,7 @@ const Login = () => {
           </div>
           <button type="submit">Entrar</button>
           <h4>Não tenho conta!</h4>
-          <button type="submit">Cadastrar</button>
+          <button type="submit" onClick={criarConta} >Cadastrar</button>
         </div>
       </div>
     </form>
