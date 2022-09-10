@@ -2,24 +2,30 @@ import React, { useState } from "react";
 import "./login.css";
 import { MdEmail, MdLock } from "react-icons/md";
 import { HiEye, HiEyeOff } from "react-icons/hi";
+import { Link, useNavigate } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import Cadastro from "../Authenticate";
 
 
-
 const Login = () => {
-  // definindo estados iniciais 
+    // definindo estados iniciais 
   // [] para manipular o estado das propriedades
+  const [error, setError] = useState("");
   const [inputs, setInputs] = useState({});
   const [show, setShow] = useState(false);
+  const [email, setEmail] = useState("");
+  const [emailConf, setEmailConf] = useState("");
+  const [senha, setSenha] = useState("");
+  const navigate = useNavigate();
+  // const { signup } = useAuth();
 
-
-
-  const handleChange = (event) => {
+    const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
     // console.log(event.target)
   
     setInputs(values => ({...values, [name]: value}))
+
   }
 
   const handleSubmit = (event) => {
@@ -32,35 +38,27 @@ const Login = () => {
     setShow(!show);
   };
 
-  const criarConta = (e) => {
-    e.preventDefault();
+  const handleLogin = () => {
+    if (!email | !senha) {
+      setError("Preencha todos os campos");
+      return;
+    }
+    navigate("/signup");
+  };
 
-    // <Cadastro/>
-    console.log('clicou no botão')
-
-  }
-  
-
-
-  return (
-    // onSubmit -> envia p formulario
+  return(
+        // onSubmit -> envia p formulario
     <form onSubmit={handleSubmit}>
       <div className="login">
-        {/* <div className="login-logo">
-          <img
-            src="https://www.freeiconspng.com/thumbs/login-icon/client-login-icon-4.gif"
-            alt="Icone de login"
-          />
-        </div> */}
         <div className="login-right">
           <h1>Acessar App</h1>
           <div className="login-loginInputEmail">
             <MdEmail />
             <input
               type="email"
-              placeholder="Digite um email teste"
+              placeholder="Digite um email "
               name ="email"
-              value={inputs.email|| ""}
+              value={inputs.email}
               onChange={handleChange}
             />
           </div>
@@ -70,7 +68,7 @@ const Login = () => {
               type={show ? "text" : "password"}
               placeholder="Digite sua senha"
               name = "password"
-              value={inputs.password || ""}
+              value={inputs.password }
               onChange={handleChange}
             />
             <div className="login-eye">
@@ -82,8 +80,9 @@ const Login = () => {
             </div>
           </div>
           <button type="submit">Entrar</button>
-          <h4>Não tenho conta!</h4>
-          <button type="submit" onClick={criarConta} >Cadastrar</button>
+          <h4>Não tenho conta?</h4>
+          <Link to="/signup" className="link-cadastro">&nbsp;<em>Cadastre-se </em></Link>
+          
         </div>
       </div>
     </form>
@@ -91,3 +90,5 @@ const Login = () => {
 };
 
 export default Login;
+
+

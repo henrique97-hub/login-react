@@ -1,14 +1,15 @@
-import React from 'react';
-import './App.css';
-import Login from '../src/pages/Login'
+import React from "react";
+import "./App.css";
+import RoutesApp from "./routes";
 
 
-function App() {
-  return (
-    <div className="App">
-      <Login/>
-    </div>
-  );
+const App = () => {
+  return(
+    <>
+    <RoutesApp/>
+    </>
+    
+  )
 }
+export default App
 
-export default App;
